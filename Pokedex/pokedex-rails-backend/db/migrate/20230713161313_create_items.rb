@@ -1,13 +1,11 @@
 class CreateItems < ActiveRecord::Migration[7.0]
   def change
     create_table :items do |t|
-      t.bigint "pokemon_id", null: false
-      t.string "name", null: false
-      t.integer "price", null: false
-      t.integer "happiness", null: false
-      t.string "image_url", null: false
-      t.index ["pokemon_id"], name: "index_items_on_pokemon_id"
-
+      t.references :pokemon, null: false, index: true, foreign_key: { to_table: :pokemons }
+      t.string :name, null: false
+      t.integer :price, null: false
+      t.integer :happiness, null: false
+      t.string :image_url, null: false
       t.timestamps
     end
   end

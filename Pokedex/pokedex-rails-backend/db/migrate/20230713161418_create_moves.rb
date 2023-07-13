@@ -1,9 +1,7 @@
 class CreateMoves < ActiveRecord::Migration[7.0]
   def change
     create_table :moves do |t|
-      t.string "name", null: false
-      t.index ["name"], name: "index_moves_on_name", unique: true
-
+      t.string :name, null: false, unique: true
       t.timestamps
     end
   end

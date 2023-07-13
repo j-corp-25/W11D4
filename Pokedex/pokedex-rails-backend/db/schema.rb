@@ -29,7 +29,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_161502) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_moves_on_name", unique: true
   end
 
   create_table "poke_moves", force: :cascade do |t|
@@ -39,6 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_161502) do
     t.datetime "updated_at", null: false
     t.index ["move_id"], name: "index_poke_moves_on_move_id"
     t.index ["pokemon_id", "move_id"], name: "index_poke_moves_on_pokemon_id_and_move_id", unique: true
+    t.index ["pokemon_id"], name: "index_poke_moves_on_pokemon_id"
   end
 
   create_table "pokemons", force: :cascade do |t|
@@ -55,4 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_161502) do
     t.index ["number"], name: "index_pokemons_on_number", unique: true
   end
 
+  add_foreign_key "items", "pokemons"
+  add_foreign_key "poke_moves", "moves"
+  add_foreign_key "poke_moves", "pokemons"
 end
